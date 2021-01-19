@@ -3,7 +3,7 @@ mod constants;
 mod controllers;
 mod models;
 mod utils;
-use controllers::rest::post_json_to_path;
+use controllers::rest;
 use models::server_error::{map_to_server_error, ServerError};
 
 #[get("/")]
@@ -29,7 +29,9 @@ async fn main() -> std::io::Result<()> {
             // Logger Middleware
             .wrap(Logger::default())
             // Controller Endpoint Services
-            .service(post_json_to_path)
+            .service(rest::post_json_to_path)
+            .service(rest::get_json_from_path)
+            .service(rest::delete_json_from_path)
             .service(hello)
             .service(echo)
     })
