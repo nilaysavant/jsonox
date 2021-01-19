@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use crate::{
     constants::paths::APP_DATA_DIR,
     models::server_error::{map_to_server_error, ServerError},
@@ -9,21 +11,37 @@ use actix_web::{
     HttpResponse,
 };
 use relative_path::RelativePath;
+use serde_json::json;
 use walkdir::WalkDir;
 
 /// List all active paths
 /// - List all available json paths
 #[get("/")]
 pub async fn list_active_paths() -> Result<HttpResponse, ServerError> {
-    let active_paths = WalkDir::new(APP_DATA_DIR)
+    let file_pathbufs = WalkDir::new(APP_DATA_DIR)
         .into_iter()
         .filter_map(|e| e.ok())
         .filter(|e| e.metadata().is_ok())
         .filter(|e| e.metadata().unwrap().is_file())
-        .map(|e| e.path().display().to_string())
+        .map(|e| e.path().to_owned())
+        .collect::<Vec<PathBuf>>();
+
+    let active_paths = file_pathbufs
+        .into_iter()
+        .filter(|e| e.parent().is_some())
+        .filter_map(|e| {
+            let path = e.parent().unwrap().strip_prefix(APP_DATA_DIR);
+            match path {
+                Ok(_) => match path.unwrap().to_str() {
+                    Some(p) => Some(p.to_string()),
+                    None => None,
+                },
+                Err(_) => None,
+            }
+        })
         .collect::<Vec<String>>();
-    println!("active_paths: {:?}", active_paths);
-    Ok(HttpResponse::Ok().json({}))
+
+    Ok(HttpResponse::Ok().json(json!({ "active_paths": active_paths })))
 }
 
 /// Post JSON to specified path
