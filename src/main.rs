@@ -1,12 +1,14 @@
-use actix_web::{
-    get,
-    web,
-    App, HttpResponse, HttpServer, Responder,
-};
+use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 
 #[get("/")]
 async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
+}
+
+#[post("/echo")]
+async fn echo(req_body: String) -> impl Responder {
+    let json_body: serde_json::Value = serde_json::from_str(req_body.as_str()).unwrap();
+    HttpResponse::Ok().json(json_body)
 }
 
 async fn manual_hello() -> impl Responder {
@@ -18,6 +20,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(hello)
+            .service(echo)
             .route("/hey", web::get().to(manual_hello))
     })
     .bind("127.0.0.1:8080")?
