@@ -14,8 +14,8 @@ impl ServerError {
     /// Get `name` of the error or `type` of error
     fn name(&self) -> String {
         match self {
-            ServerError::InternalError { message } => "InternalError".to_string(),
-            ServerError::UserError { message } => "UserError".to_string(),
+            ServerError::InternalError { message: _ } => "InternalError".to_string(),
+            ServerError::UserError { message: _ } => "UserError".to_string(),
         }
     }
     /// Get Error Message
