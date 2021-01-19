@@ -1,4 +1,4 @@
-use actix_web::{get, middleware::Logger, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, middleware::Logger, post, App, HttpResponse, HttpServer, Responder};
 mod models;
 use models::server_error::{map_to_server_error, ServerError};
 
