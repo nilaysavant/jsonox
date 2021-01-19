@@ -28,6 +28,7 @@ async fn main() -> std::io::Result<()> {
             // Logger Middleware
             .wrap(Logger::default())
             // Controller Endpoint Services
+            .service(rest::list_active_paths)
             .service(rest::post_json_to_path)
             .service(rest::get_json_from_path)
             .service(rest::delete_json_from_path)

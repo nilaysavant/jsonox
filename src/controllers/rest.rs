@@ -9,6 +9,22 @@ use actix_web::{
     HttpResponse,
 };
 use relative_path::RelativePath;
+use walkdir::WalkDir;
+
+/// List all active paths
+/// - List all available json paths
+#[get("/")]
+pub async fn list_active_paths() -> Result<HttpResponse, ServerError> {
+    let active_paths = WalkDir::new(APP_DATA_DIR)
+        .into_iter()
+        .filter_map(|e| e.ok())
+        .filter(|e| e.metadata().is_ok())
+        .filter(|e| e.metadata().unwrap().is_file())
+        .map(|e| e.path().display().to_string())
+        .collect::<Vec<String>>();
+    println!("active_paths: {:?}", active_paths);
+    Ok(HttpResponse::Ok().json({}))
+}
 
 /// Post JSON to specified path
 /// - This creates a json file in the project data dir(in the specified path) with the posted json data
