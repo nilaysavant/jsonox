@@ -2,6 +2,7 @@ use actix_web::{get, middleware::Logger, post, App, HttpResponse, HttpServer, Re
 mod constants;
 mod controllers;
 mod models;
+mod utils;
 use controllers::rest::post_json_to_path;
 use models::server_error::{map_to_server_error, ServerError};
 

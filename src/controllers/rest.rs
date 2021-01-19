@@ -1,6 +1,7 @@
 use crate::{
     constants::paths::APP_DATA_DIR,
     models::server_error::{map_to_server_error, ServerError},
+    utils::fsutils::write_to_path,
 };
 use actix_web::{
     post,
@@ -25,6 +26,7 @@ pub async fn post_json_to_path(
         if file_path.starts_with(APP_DATA_DIR) {
             let body: serde_json::Value =
                 serde_json::from_str(&req_body).map_err(map_to_server_error)?;
+            write_to_path(file_path.as_path(), &body)?;
             Ok(HttpResponse::Ok().json(body))
         } else {
             Err(ServerError::UserError {
