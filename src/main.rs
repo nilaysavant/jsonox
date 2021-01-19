@@ -1,10 +1,9 @@
-use actix_web::{get, middleware::Logger, post, App, HttpResponse, HttpServer, Responder};
+use actix_web::{middleware::Logger, App, HttpServer};
 mod constants;
 mod controllers;
 mod models;
 mod utils;
 use controllers::rest;
-use models::server_error::{map_to_server_error, ServerError};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
