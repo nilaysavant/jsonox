@@ -12,7 +12,7 @@ use relative_path::RelativePath;
 
 /// Post JSON to specified path
 /// - This creates a json file in the project data dir(in the specified path) with the posted json data
-#[post("/rest/{url_path:.*}")]
+#[post("/{url_path:.*}")]
 pub async fn post_json_to_path(
     url_path: web::Path<String>,
     req_body: String,
@@ -42,7 +42,7 @@ pub async fn post_json_to_path(
 
 /// Get JSON from specified path
 /// - This reads a json file in the project data dir(in the specified path) retrieves the initially posted json data
-#[get("/rest/{url_path:.*}")]
+#[get("/{url_path:.*}")]
 pub async fn get_json_from_path(url_path: web::Path<String>) -> Result<HttpResponse, ServerError> {
     if url_path.len() > 0 {
         let file_path = RelativePath::new(url_path.as_str())
@@ -69,7 +69,7 @@ pub async fn get_json_from_path(url_path: web::Path<String>) -> Result<HttpRespo
 
 /// Delete JSON from specified path
 /// - This reads a json file in the project data dir(in the specified path) retrieves the initially posted json data
-#[delete("/rest/{url_path:.*}")]
+#[delete("/{url_path:.*}")]
 pub async fn delete_json_from_path(
     url_path: web::Path<String>,
 ) -> Result<HttpResponse, ServerError> {
