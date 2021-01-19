@@ -2,6 +2,8 @@ use clap::{App, Arg};
 
 use crate::constants::app_metadata::{APP_AUTHOR, APP_DESCRIPTION, APP_NAME, APP_VERSION};
 
+use super::tutorial::TUTORIAL_TEXT;
+
 /// Setup CLI interface with help and args
 /// Returns a matches struct from which arg values can be extracted
 pub fn setup_cli_get_matches() -> clap::ArgMatches<'static> {
@@ -10,19 +12,20 @@ pub fn setup_cli_get_matches() -> clap::ArgMatches<'static> {
         .version(APP_VERSION)
         .author(APP_AUTHOR)
         .about(APP_DESCRIPTION)
+        .after_help(TUTORIAL_TEXT)
         .arg(
             Arg::with_name("bind_addr")
                 .short("b")
                 .long("bind-addr")
                 .value_name("IP:PORT")
-                .help("Set the IP:PORT for server to listen on defaults to 0.0.0.0:8080")
+                .help("Set bind address (defaults to 0.0.0.0:8080)")
                 .takes_value(true),
         )
         .arg(
             Arg::with_name("quiet")
                 .short("q")
                 .long("quiet")
-                .help("Quiet Mode with no logging")
+                .help("Quiet mode with no logging"),
         )
         .get_matches()
 }
