@@ -6,18 +6,6 @@ mod utils;
 use controllers::rest;
 use models::server_error::{map_to_server_error, ServerError};
 
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
-}
-
-#[post("/echo")]
-async fn echo(req_body: String) -> Result<HttpResponse, ServerError> {
-    let json_body: serde_json::Value =
-        serde_json::from_str(req_body.as_str()).map_err(map_to_server_error)?;
-    Ok(HttpResponse::Ok().json(json_body))
-}
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "jsonox=debug,actix_web=info");
@@ -32,8 +20,6 @@ async fn main() -> std::io::Result<()> {
             .service(rest::post_json_to_path)
             .service(rest::get_json_from_path)
             .service(rest::delete_json_from_path)
-            .service(hello)
-            .service(echo)
     })
     .bind("127.0.0.1:8080")?
     .run()
