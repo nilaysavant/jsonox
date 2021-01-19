@@ -1,5 +1,6 @@
 use actix_web::{HttpResponse, ResponseError};
 use derive_more::{Display, Error};
+use log::error;
 use serde_json::json;
 
 #[derive(Debug, Display, Error)]
@@ -28,6 +29,8 @@ impl ServerError {
 
 impl ResponseError for ServerError {
     fn error_response(&self) -> HttpResponse {
+        // log error to console
+        error!("{}: {}", self.name(), self.message());
         let status_code = self.status_code();
         let error_response = json!( {
             "code": status_code.as_u16(),
