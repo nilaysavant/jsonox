@@ -1,4 +1,6 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+mod models;
+use models::server_error::{ServerError, map_to_server_error};
 
 #[get("/")]
 async fn hello() -> impl Responder {
@@ -6,9 +8,9 @@ async fn hello() -> impl Responder {
 }
 
 #[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    let json_body: serde_json::Value = serde_json::from_str(req_body.as_str()).unwrap();
-    HttpResponse::Ok().json(json_body)
+async fn echo(req_body: String) -> Result<HttpResponse, ServerError> {
+    let json_body: serde_json::Value = serde_json::from_str(req_body.as_str()).map_err(map_to_server_error)?;
+    Ok(HttpResponse::Ok().json(json_body))
 }
 
 async fn manual_hello() -> impl Responder {
