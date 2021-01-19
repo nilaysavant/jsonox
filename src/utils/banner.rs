@@ -7,11 +7,12 @@ pub fn get_banner() -> String {
     888 `\"Y88b.  888   888  888   888  888   888    Y888'    
     888 o.  )88b 888   888  888   888  888   888  .o8\"'88b   
     888 8\"\"888P' `Y8bod8P' o888o o888o `Y8bod8P' o88'   888o 
-    888                                                      
+    888                                     {purple}BY: NILAY SAVANT{nc}{cyan} 
 .o. 88P                                                      
 `Y888P{nc}                                                       
 ",
         cyan = "\x1b[0;36m",
+        purple = "\x1b[0;35m",
         nc = "\x1b[0m",
     )
 }
