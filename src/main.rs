@@ -4,7 +4,7 @@ mod controllers;
 mod models;
 mod utils;
 use controllers::rest;
-use utils::{banner::BANNER, cli::setup_cli_get_matches};
+use utils::{banner::get_banner, cli::setup_cli_get_matches};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -19,8 +19,14 @@ async fn main() -> std::io::Result<()> {
         env_logger::init();
     }
 
-    println!("{}", BANNER);
-    println!("Server running at: http://{}", bind_addr);
+    println!("{}", get_banner());
+    println!(
+        "{green}Server running at:{nc} {orange}http://{bind_addr}{nc}",
+        green = "\x1b[0;32m",
+        orange = "\x1b[0;33m",
+        nc = "\x1b[0m",
+        bind_addr = bind_addr
+    );
     println!();
 
     HttpServer::new(|| {
