@@ -1,4 +1,4 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, middleware::Logger, post, web, App, HttpResponse, HttpServer, Responder};
 mod models;
 use models::server_error::{map_to_server_error, ServerError};
 
@@ -16,8 +16,19 @@ async fn echo(req_body: String) -> Result<HttpResponse, ServerError> {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(hello).service(echo))
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+    std::env::set_var("RUST_LOG", "jsonox=debug,actix_web=info");
+    std::env::set_var("RUST_BACKTRACE", "1");
+    env_logger::init();
+
+    HttpServer::new(|| {
+        App::new()
+            // Logger Middleware
+            .wrap(Logger::default())
+            // Controller Endpoint Services
+            .service(hello)
+            .service(echo)
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
 }
