@@ -4,11 +4,21 @@ mod controllers;
 mod models;
 mod utils;
 use controllers::rest;
+use utils::cli::setup_cli_get_matches;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    std::env::set_var("RUST_LOG", "jsonox=debug,actix_web=info");
-    std::env::set_var("RUST_BACKTRACE", "1");
+    let matches = setup_cli_get_matches();
+
+    // Gets a value for bind_addr if supplied by user, or defaults to "0.0.0.0:8080"
+    let bind_addr = matches.value_of("bind_addr").unwrap_or("0.0.0.0:8080");
+    // Enable quite mode check
+    let quiet_mode = matches.is_present("quiet");
+
+    if !quiet_mode {
+        std::env::set_var("RUST_LOG", "jsonox=debug,actix_web=info");
+        std::env::set_var("RUST_BACKTRACE", "1");
+    }
     env_logger::init();
 
     HttpServer::new(|| {
@@ -20,7 +30,7 @@ async fn main() -> std::io::Result<()> {
             .service(rest::get_json_from_path)
             .service(rest::delete_json_from_path)
     })
-    .bind("127.0.0.1:8080")?
+    .bind(bind_addr)?
     .run()
     .await
 }
