@@ -29,6 +29,7 @@ GUIDE:
                 - index.json{nc}
     {green}Then:{nc}
         {purple}GET{nc}: {cyan}/{nc} => {orange}{{ \"active_paths\": [ \"pets\", \"pets/cat\", \"pets/dog\", \"toys/doll\" ] }}{nc}
+    
     {green}You can then do{nc} {purple}GET/POST/DELETE{nc} {green}on the endpoint paths above.{nc}
 ",
         // red = "\x1b[0;31m",
