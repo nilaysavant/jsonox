@@ -1,5 +1,7 @@
 use actix_web::{get, middleware::Logger, post, App, HttpResponse, HttpServer, Responder};
+mod controllers;
 mod models;
+use controllers::rest::post_json_to_path;
 use models::server_error::{map_to_server_error, ServerError};
 
 #[get("/")]
@@ -25,6 +27,7 @@ async fn main() -> std::io::Result<()> {
             // Logger Middleware
             .wrap(Logger::default())
             // Controller Endpoint Services
+            .service(post_json_to_path)
             .service(hello)
             .service(echo)
     })
