@@ -1,3 +1,4 @@
+use actix_cors::Cors;
 use actix_web::{middleware::Logger, App, HttpServer};
 mod constants;
 mod controllers;
@@ -33,6 +34,8 @@ async fn main() -> std::io::Result<()> {
         App::new()
             // Logger Middleware
             .wrap(Logger::default())
+            // Cors Middleware
+            .wrap(Cors::permissive())
             // Controller Endpoint Services
             .service(rest::list_active_paths)
             .service(rest::post_json_to_path)
