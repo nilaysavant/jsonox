@@ -20,24 +20,24 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: test-github-action-workflow
-            asset_name: test-github-action-workflow-linux-amd64
+            artifact_name: jsonox
+            asset_name: jsonox-linux-amd64
             target: x86_64-unknown-linux-gnu
             toolchain: stable
             use_cross: false
             args: --release --locked --target x86_64-unknown-linux-gnu
 
           - os: windows-latest
-            artifact_name: test-github-action-workflow.exe
-            asset_name: test-github-action-workflow-win-amd64.exe
+            artifact_name: jsonox.exe
+            asset_name: jsonox-win-amd64.exe
             target: x86_64-pc-windows-gnu
             toolchain: stable
             use_cross: false
             args: --release --locked --target x86_64-pc-windows-gnu
 
           - os: macos-latest
-            artifact_name: test-github-action-workflow
-            asset_name: test-github-action-workflow-macos-amd64
+            artifact_name: jsonox
+            asset_name: jsonox-macos-amd64
             target: x86_64-apple-darwin
             toolchain: stable
             use_cross: false
@@ -45,8 +45,8 @@ jobs:
 
           # For Raspberry PI based systems
           - os: ubuntu-latest
-            artifact_name: test-github-action-workflow
-            asset_name: test-github-action-workflow-linux-armv7
+            artifact_name: jsonox
+            asset_name: jsonox-linux-armv7
             target: armv7-unknown-linux-gnueabihf
             toolchain: stable
             use_cross: true
