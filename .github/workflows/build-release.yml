@@ -1,0 +1,81 @@
+# Inspired from:
+# - https://mateuscosta.me/rust-releases-with-github-actions
+# - https://github.com/actions-rs/cargo
+# - https://alican.codes/rust-github-actions/
+
+name: Build multi-platform binary on release (assets for release)
+
+on:
+  release:
+    types: [published, created, edited, prereleased, released]
+#   push:
+#     branches:
+#       - master
+
+jobs:
+  release:
+    name: Build and Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: test-github-action-workflow
+            asset_name: test-github-action-workflow-linux-amd64
+            target: x86_64-unknown-linux-gnu
+            toolchain: stable
+            use_cross: false
+            args: --release --locked --target x86_64-unknown-linux-gnu
+
+          - os: windows-latest
+            artifact_name: test-github-action-workflow.exe
+            asset_name: test-github-action-workflow-win-amd64.exe
+            target: x86_64-pc-windows-gnu
+            toolchain: stable
+            use_cross: false
+            args: --release --locked --target x86_64-pc-windows-gnu
+
+          - os: macos-latest
+            artifact_name: test-github-action-workflow
+            asset_name: test-github-action-workflow-macos-amd64
+            target: x86_64-apple-darwin
+            toolchain: stable
+            use_cross: false
+            args: --release --locked --target x86_64-apple-darwin
+
+          # For Raspberry PI based systems
+          - os: ubuntu-latest
+            artifact_name: test-github-action-workflow
+            asset_name: test-github-action-workflow-linux-armv7
+            target: armv7-unknown-linux-gnueabihf
+            toolchain: stable
+            use_cross: true
+            args: --release --locked --target armv7-unknown-linux-gnueabihf
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install and setup toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          target: ${{ matrix.target }}
+          override: true
+
+      - name: Build project with Cargo
+        uses: actions-rs/cargo@v1
+        with:
+          use-cross: ${{ matrix.use_cross }}
+          command: build
+          args: ${{ matrix.args }}
+
+      - name: Upload binary to release
+        uses: svenstaro/upload-release-action@v1-release
+        if: startsWith(github.ref, 'refs/tags/') # Upload only if called on a tag release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/${{ matrix.target }}/release/${{ matrix.artifact_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
+          overwrite: true
