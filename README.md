@@ -1,6 +1,6 @@
 # jsonox
 
-A CLI based RESTful JSON server + store written in Rust.
+CLI based RESTful JSON server + store written in Rust.
 
 ## Features
 
