@@ -1,15 +1,15 @@
-# jsonox
+# jsonox 🛰
 
 CLI based RESTful JSON server + store written in Rust.
 
-## Features
+## Features 🚀
 
 - Setup **API endpoints** on **any route** by simply **POST**ing `JSON` to that route.
-- Endpoints support `GET` for fetching and `DELETE` for deleting stored JSON.
+- Endpoints support **GET** for fetching and **DELETE** for deleting stored JSON.
 - JSON data is stored as `*.json` files under the `json_data` dir.
 - View active endpoints on the root (`/`) path.
 
-## Installation
+## Installation 🔧
 
 ### Pre-compiled Binary
 
@@ -40,7 +40,7 @@ CLI based RESTful JSON server + store written in Rust.
   chmod +x jsonox
   ```
 
-## Usage Examples
+## Usage Examples 📡
 
 ### Command line
 
@@ -79,3 +79,61 @@ CLI based RESTful JSON server + store written in Rust.
   ```
 
   - Use `-h` or `--help` for help.
+
+### REST API
+
+Construct **REST** api endpoints on **arbitrary routes** in the following way(s):
+
+- **POST** the following to `/pets/cat`:
+
+  ```json
+  { "cute": true }
+  ```
+
+- Then **GET** at `/pets/cat` will receive:
+
+  ```json
+  { "cute": true }
+  ```
+
+- Similarly you can **DELETE** data stored at `/pets/cat`, this will also receive:
+
+  ```json
+  { "cute": true }
+  ```
+
+- The above requests will setup files under `./jsonox_data` with the following structure:
+
+  ```bash
+  - pets/
+    - cat/
+      - index.json
+  ```
+
+- `GET` on root endpoint `/` will display all active endpoints:
+
+  ```json
+  { "active_paths": ["pets/cat"] }
+  ```
+
+You can also setup your own API by creating files under `./jsonox_data` in the structure similar as above:
+
+```bash
+- pets/
+  - dog/
+    - index.json
+  - cat/
+    - index.json
+  - index.json
+- toys/
+  - doll/
+    - index.json
+```
+
+- Then `GET` on `/` will show active endpoints:
+
+  ```json
+  { "active_paths": ["pets", "pets/cat", "pets/dog", "toys/doll"] }
+  ```
+
+- You can then do **GET**,**POST** and **DELETE** similarly, on the endpoint paths above.
