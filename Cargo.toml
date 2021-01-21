@@ -3,6 +3,12 @@ name = "jsonox"
 version = "0.1.0"
 authors = ["Nilay Savant <nilayofficial@gmail.com>"]
 edition = "2018"
+description = "RESTful JSON server + store written in Rust"
+repository = "https://github.com/nilaysavant/jsonox"
+readme = "README.md"
+license-file = "LICENSE"
+keywords = ["json", "json-server", "json-store", "mock-server", "actix-web"]
+categories = ["command-line-utilities", "development-tools", "database-implementations","filesystem", "web-programming::http-server"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
