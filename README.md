@@ -1,4 +1,4 @@
-# jsonox 🛰  ![Build Release](https://github.com/nilaysavant/jsonox/workflows/Build%20Release/badge.svg?branch=v0.1.0)
+# jsonox 🛰 ![Build Release](https://github.com/nilaysavant/jsonox/workflows/Build%20Release/badge.svg?branch=v0.1.0)
 
 CLI based RESTful JSON server + store written in Rust.
 
@@ -13,6 +13,8 @@ CLI based RESTful JSON server + store written in Rust.
 
 ## Installation 🔧
 
+You can install in 3 ways: Using pre-compiled binary, from Crate or by manually building from source using rust tool-chain. Give necessary executable permissions for the binary and if building from source.
+
 ### Pre-compiled Binary
 
 - Download binary for your platform from the latest [release](https://github.com/nilaysavant/jsonox/releases).
@@ -24,6 +26,13 @@ CLI based RESTful JSON server + store written in Rust.
   | jsonox-win-amd64.exe | 64-bit Windows 7+                         |
   | jsonox-linux-armv7   | ARMv7 Linux: Raspberry PI, Debian, Ubuntu |
 
+### Install from [Crate](https://crates.io/crates/jsonox)
+
+- Use cargo install:
+  ```bash
+  cargo install jsonox
+  ```
+
 ### Or Build From Source
 
 - Clone the repository and run:
@@ -34,7 +43,7 @@ CLI based RESTful JSON server + store written in Rust.
 
 - Compiled binary will be located at `target/release/jsonox`
 
-### Give Permissions
+### Give Permissions (if required)
 
 - Set executable permission:
 
