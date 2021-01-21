@@ -29,6 +29,7 @@ You can install in 3 ways: Using pre-compiled binary, from Crate or by manually 
 ### Install from [Crate](https://crates.io/crates/jsonox)
 
 - Use cargo install:
+
   ```bash
   cargo install jsonox
   ```
