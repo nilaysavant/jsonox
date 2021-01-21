@@ -40,7 +40,7 @@ CLI based RESTful JSON server + store written in Rust.
   chmod +x jsonox
   ```
 
-## Usage Examples 📡
+## Usage 📡
 
 Run the server via the **CLI**, then setup **REST API endpoints**.
 
