@@ -5,9 +5,9 @@ CLI based RESTful JSON server + store written in Rust.
 ## Features 🚀
 
 - Setup **API endpoints** on **any route** by simply **POST**ing `JSON` to that route.
-- Endpoints support **GET** for fetching and **DELETE** for deleting stored JSON.
-- JSON data is stored as `*.json` files under the `json_data` dir.
-- View active endpoints on the root (`/`) path.
+- Endpoints support **GET** for fetching and **DELETE** for deleting stored JSON along with **POST**.
+- **JSON** data is stored as `*.json` files under the `json_data` dir.
+- View all **active endpoints** on the root (`/`) path.
 
 ## Installation 🔧
 
@@ -42,7 +42,9 @@ CLI based RESTful JSON server + store written in Rust.
 
 ## Usage Examples 📡
 
-### Command line
+Run the server via the **CLI**, then setup **REST API endpoints**.
+
+### Command line (CLI)
 
 - Simple server with logging:
 
@@ -82,7 +84,7 @@ CLI based RESTful JSON server + store written in Rust.
 
 ### REST API
 
-Construct **REST** api endpoints on **arbitrary routes** in the following way(s):
+Construct **REST API** endpoints on **arbitrary routes** in the following way(s):
 
 - **POST** the following to `/pets/cat`:
 
