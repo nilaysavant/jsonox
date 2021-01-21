@@ -8,6 +8,8 @@ CLI based RESTful JSON server + store written in Rust.
 - Endpoints support **GET** for fetching and **DELETE** for deleting stored JSON along with **POST**.
 - **JSON** data is stored as `*.json` files under the `json_data` dir.
 - View all **active endpoints** on the root (`/`) path.
+  
+**[DISCLAIMER: This program is designed for development purposes. Use in production at your own risk!]**
 
 ## Installation 🔧
 
