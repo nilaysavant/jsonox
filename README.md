@@ -2,6 +2,8 @@
 
 CLI based RESTful JSON server + store written in Rust.
 
+### ![Build Release](https://github.com/nilaysavant/jsonox/workflows/Build%20Release/badge.svg?branch=v0.1.0)
+
 ## Features 🚀
 
 - Setup **API endpoints** on **any route** by simply **POST**ing `JSON` to that route.
