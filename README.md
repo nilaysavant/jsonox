@@ -30,6 +30,8 @@ CLI based RESTful JSON server + store written in Rust.
   cargo build --lock --release
   ```
 
+- Compiled binary will be located at `target/release/jsonox`
+
 ### Give Permissions
 
 - Set executable permission:
@@ -38,9 +40,7 @@ CLI based RESTful JSON server + store written in Rust.
   chmod +x jsonox
   ```
 
-- Compiled binary will be located at `target/release/jsonox`
-
-## Examples
+## Usage Examples
 
 ### Command line
 
