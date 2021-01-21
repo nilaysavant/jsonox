@@ -78,4 +78,4 @@ CLI based RESTful JSON server + store written in Rust.
   ./jsonox --help
   ```
 
-  - Use `-h` or `--help` for quiet mode.
+  - Use `-h` or `--help` for help.
