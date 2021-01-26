@@ -6,7 +6,7 @@ use crate::{
     utils::fsutils::{read_from_path, remove_from_path, write_to_path},
 };
 use actix_web::{
-    delete, get, post, route,
+    delete, get, route,
     web::{self},
     HttpResponse,
 };
