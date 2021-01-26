@@ -23,6 +23,12 @@ pub fn setup_cli_get_matches() -> clap::ArgMatches<'static> {
                 .takes_value(true),
         )
         .arg(
+            Arg::with_name("read-only")
+                .short("r")
+                .long("read-only")
+                .help("Read only mode. No writes to the file system"),
+        )
+        .arg(
             Arg::with_name("quiet")
                 .short("q")
                 .long("quiet")

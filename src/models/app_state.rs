@@ -1,11 +1,11 @@
 /// State of the Application
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct AppState {
-    mode: AppMode,
+    pub mode: AppMode,
 }
 
 /// AppMode: Normal or ReadOnly
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum AppMode {
     Normal,
     ReadOnly,
