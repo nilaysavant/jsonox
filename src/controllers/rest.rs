@@ -29,7 +29,7 @@ pub async fn list_active_paths() -> Result<HttpResponse, ServerError> {
         .map(|e| e.path().to_owned())
         .collect::<Vec<PathBuf>>();
 
-    let active_paths = file_pathbufs
+    let mut active_paths = file_pathbufs
         .into_iter()
         .filter(|e| e.parent().is_some())
         .filter_map(|e| {
@@ -43,6 +43,8 @@ pub async fn list_active_paths() -> Result<HttpResponse, ServerError> {
             }
         })
         .collect::<Vec<String>>();
+    active_paths.sort(); // Sort
+    active_paths.dedup(); // Remove duplicates
 
     Ok(HttpResponse::Ok().json(json!({ "active_paths": active_paths })))
 }
