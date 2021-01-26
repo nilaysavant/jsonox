@@ -6,7 +6,7 @@ use crate::{
     utils::fsutils::{read_from_path, remove_from_path, write_to_path},
 };
 use actix_web::{
-    delete, get, post,
+    delete, get, post, route,
     web::{self},
     HttpResponse,
 };
@@ -44,9 +44,9 @@ pub async fn list_active_paths() -> Result<HttpResponse, ServerError> {
     Ok(HttpResponse::Ok().json(json!({ "active_paths": active_paths })))
 }
 
-/// Post JSON to specified path
+/// Post/Put JSON to specified path
 /// - This creates a json file in the project data dir(in the specified path) with the posted json data
-#[post("/{url_path:.*}")]
+#[route("/{url_path:.*}", method = "POST", method = "PUT")] // Allow POST + PUT handling
 pub async fn post_json_to_path(
     url_path: web::Path<String>,
     req_body: String,
