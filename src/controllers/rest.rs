@@ -118,22 +118,30 @@ pub async fn post_json_to_path(
 /// Get JSON from specified path
 /// - This reads a json file in the project data dir(in the specified path) retrieves the initially posted json data
 #[get("/{url_path:.*}")]
-pub async fn get_json_from_path(url_path: web::Path<String>) -> Result<HttpResponse, ServerError> {
+pub async fn get_json_from_path(
+    url_path: web::Path<String>,
+    data: web::Data<AppState>,
+) -> Result<HttpResponse, ServerError> {
     if url_path.len() > 0 {
-        let file_path = RelativePath::new(url_path.as_str())
-            .join("index.json")
-            .normalize()
-            .to_path(APP_DATA_DIR)
-            .to_owned();
-        if file_path.starts_with(APP_DATA_DIR) {
-            let json_string = read_from_path(file_path.as_path())?;
-            let json_data: serde_json::Value =
-                serde_json::from_str(&json_string).map_err(map_to_server_error)?;
-            Ok(HttpResponse::Ok().json(json_data))
-        } else {
-            Err(ServerError::UserError {
-                message: "JSON file path invalid!".to_string(),
-            })
+        match &data.mode {
+            AppMode::Normal => {
+                let file_path = RelativePath::new(url_path.as_str())
+                    .join("index.json")
+                    .normalize()
+                    .to_path(APP_DATA_DIR)
+                    .to_owned();
+                if file_path.starts_with(APP_DATA_DIR) {
+                    let json_string = read_from_path(file_path.as_path())?;
+                    let json_data: serde_json::Value =
+                        serde_json::from_str(&json_string).map_err(map_to_server_error)?;
+                    Ok(HttpResponse::Ok().json(json_data))
+                } else {
+                    Err(ServerError::UserError {
+                        message: "JSON file path invalid!".to_string(),
+                    })
+                }
+            }
+            AppMode::ReadOnly => read_only_handler(url_path, "get.json"),
         }
     } else {
         Err(ServerError::UserError {
