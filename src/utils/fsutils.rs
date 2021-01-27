@@ -42,6 +42,16 @@ pub fn write_to_path<P: AsRef<Path> + Copy>(
 pub fn remove_from_path<P: AsRef<Path> + Copy>(path: P) -> Result<String, ServerError> {
     let json_string = fs::read_to_string(path).map_err(map_to_server_error)?;
     let parent_path = path.as_ref().parent().unwrap_or(Path::new(APP_DATA_DIR));
-    fs::remove_dir_all(parent_path).map_err(map_to_server_error)?;
+    // read num of files + subdir present in path dir
+    let num_entries_in_dir = fs::read_dir(parent_path)
+        .map_err(map_to_server_error)?
+        .count();
+    if num_entries_in_dir <= 1 {
+        // remove only if one or less files + subdirs are present in dir
+        fs::remove_dir_all(parent_path).map_err(map_to_server_error)?;
+    } else {
+        // remove only the file of specified path
+        fs::remove_file(path).map_err(map_to_server_error)?;
+    }
     Ok(json_string)
 }
