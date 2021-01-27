@@ -44,12 +44,18 @@ You can install in 3 ways: Using pre-compiled binary, from Crate or by manually 
 
 - Compiled binary will be located at `target/release/jsonox`
 
-### Give Permissions (if required)
+### Initial Setup (when installing from binary/source)
 
 - Set executable permission:
 
   ```bash
   chmod +x jsonox
+  ```
+
+- Copy binary inside your `$PATH` directory (optional):
+
+  ```bash
+  cp jsonox ~/.local/bin/ #for linux
   ```
 
 ## Usage 📡
@@ -58,10 +64,12 @@ Run the server via the **CLI**, then setup **REST API endpoints**.
 
 ### Command line (CLI)
 
+Note: In the following examples you may need to use `./jsonox` if using local binary.
+
 - Simple server with logging:
 
   ```bash
-  ./jsonox
+  jsonox
   ```
 
   - Runs at:
@@ -72,7 +80,7 @@ Run the server via the **CLI**, then setup **REST API endpoints**.
 - Specify custom bind address:
 
   ```bash
-  ./jsonox -b localhost:7000
+  jsonox -b localhost:7000
   ```
 
   - Use `-b` or `--bind-addr`
@@ -81,7 +89,7 @@ Run the server via the **CLI**, then setup **REST API endpoints**.
 - Disable logging:
 
   ```bash
-  ./jsonox --quiet
+  jsonox --quiet
   ```
 
   - Use `-q` or `--quiet` for quiet mode.
@@ -89,7 +97,7 @@ Run the server via the **CLI**, then setup **REST API endpoints**.
 - View help and guide:
 
   ```bash
-  ./jsonox --help
+  jsonox --help
   ```
 
   - Use `-h` or `--help` for help.
