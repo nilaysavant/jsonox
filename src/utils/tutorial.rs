@@ -33,21 +33,21 @@ GUIDE (normal mode):
     {green}You can then do{nc} {purple}GET/POST/PUT/DELETE{nc} {green}on the endpoint paths above.{nc}
 
 GUIDE (Read Only mode):
-    {green}Start by creating files in:{nc}
+    {green}Start by creating files in {cyan}./jsonox_data{nc}:{nc}
         {cyan}- pets/
-        - dog/
+            - dog/
+                - get.json
+                - post.json
+            - cat/
+                - get.json
             - get.json
-            - post.json
-        - cat/
-            - get.json
-        - get.json
-        - delete.json
+            - delete.json
         - toys/
             - doll/
-            - get.json
-            - post.json
-            - put.json
-            - delete.json{nc}
+                - get.json
+                - post.json
+                - put.json
+                - delete.json{nc}
     {green}In Read Only mode we create files like get.json, 
     post.json, put.json, and delete.json, instead of index.json{nc}
     {green}Thus as per above structure:{nc}
