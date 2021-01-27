@@ -155,22 +155,28 @@ pub async fn get_json_from_path(
 #[delete("/{url_path:.*}")]
 pub async fn delete_json_from_path(
     url_path: web::Path<String>,
+    data: web::Data<AppState>,
 ) -> Result<HttpResponse, ServerError> {
     if url_path.len() > 0 {
-        let file_path = RelativePath::new(url_path.as_str())
-            .join("index.json")
-            .normalize()
-            .to_path(APP_DATA_DIR)
-            .to_owned();
-        if file_path.starts_with(APP_DATA_DIR) {
-            let json_string = remove_from_path(file_path.as_path())?;
-            let json_data: serde_json::Value =
-                serde_json::from_str(&json_string).map_err(map_to_server_error)?;
-            Ok(HttpResponse::Ok().json(json_data))
-        } else {
-            Err(ServerError::UserError {
-                message: "JSON file path invalid!".to_string(),
-            })
+        match &data.mode {
+            AppMode::Normal => {
+                let file_path = RelativePath::new(url_path.as_str())
+                    .join("index.json")
+                    .normalize()
+                    .to_path(APP_DATA_DIR)
+                    .to_owned();
+                if file_path.starts_with(APP_DATA_DIR) {
+                    let json_string = remove_from_path(file_path.as_path())?;
+                    let json_data: serde_json::Value =
+                        serde_json::from_str(&json_string).map_err(map_to_server_error)?;
+                    Ok(HttpResponse::Ok().json(json_data))
+                } else {
+                    Err(ServerError::UserError {
+                        message: "JSON file path invalid!".to_string(),
+                    })
+                }
+            }
+            AppMode::ReadOnly => read_only_handler(url_path, "delete.json"),
         }
     } else {
         Err(ServerError::UserError {
