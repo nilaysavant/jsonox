@@ -5,7 +5,7 @@ CLI based RESTful JSON server + store written in Rust.
 ## Features 🚀
 
 - Setup **API endpoints** on **any route** by simply **POST**ing `JSON` to that route.
-- Endpoints support **GET** for fetching and **DELETE** for deleting stored JSON along with **POST**.
+- Endpoints support **GET** for fetching and **DELETE** for deleting stored JSON along with **POST** or **PUT**.
 - **JSON** data is stored as `*.json` files under the `json_data` dir.
 - View all **active endpoints** on the root (`/`) path.
 
@@ -114,7 +114,7 @@ Note: In the following examples you may need to use `./jsonox` if using local bi
 
 Construct **REST API** endpoints on **arbitrary routes** in the following way(s):
 
-- **POST** the following to `/pets/cat`:
+- **POST** or **PUT** the following to `/pets/cat`:
 
   ```json
   { "cute": true }
@@ -166,7 +166,9 @@ You can also setup your own API by creating files under `./jsonox_data` in the s
   { "active_paths": ["pets", "pets/cat", "pets/dog", "toys/doll"] }
   ```
 
-- You can then do **GET**,**POST** and **DELETE** similarly, on the endpoint paths above.
+- You can then do **GET**,**POST**, **PUT** and **DELETE** similarly, on the endpoint paths above.
+
+NOTE: **POST** and **PUT** are **interchangeable** and **work exactly the same in this mode**. This is due to the paths referred to being explicitly specific. To allow for different responses in case of POST and PUT, please consider using the [Read Only mode](#read-only-mode).
 
 ### Read Only Mode
 
