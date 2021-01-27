@@ -51,6 +51,15 @@ jobs:
             toolchain: stable
             use_cross: true
             args: --release --locked --target armv7-unknown-linux-gnueabihf
+          
+          # For Raspberry PI Zero (ArmV6) based systems
+          - os: ubuntu-latest
+            artifact_name: jsonox
+            asset_name: jsonox-linux-armv6
+            target: arm-unknown-linux-gnueabihf
+            toolchain: stable
+            use_cross: true
+            args: --release --locked --target arm-unknown-linux-gnueabihf
 
     steps:
       - name: Checkout code

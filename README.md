@@ -19,12 +19,13 @@ You can install in 3 ways: Using pre-compiled binary, from Crate or by manually 
 
 - Download binary for your platform from the latest [release](https://github.com/nilaysavant/jsonox/releases).
 
-  | Binary               | Platform                                  |
-  | -------------------- | ----------------------------------------- |
-  | jsonox-linux-amd64   | 64-bit Linux (Ubuntu, Debian etc)         |
-  | jsonox-macos-amd64   | 64-bit Mac OS                             |
-  | jsonox-win-amd64.exe | 64-bit Windows 7+                         |
-  | jsonox-linux-armv7   | ARMv7 Linux: Raspberry PI, Debian, Ubuntu |
+  | Binary               | Platform                                                   |
+  | -------------------- | ---------------------------------------------------------- |
+  | jsonox-linux-amd64   | 64-bit Linux (Ubuntu, Debian etc)                          |
+  | jsonox-macos-amd64   | 64-bit Mac OS                                              |
+  | jsonox-win-amd64.exe | 64-bit Windows 7+                                          |
+  | jsonox-linux-armv7   | ARMv7 Linux: Raspberry PI, Debian, Ubuntu                  |
+  | jsonox-linux-armv6   | (Untested!) ARMv6 Linux: Raspberry PI Zero, Debian, Ubuntu |
 
 ### Install from [Crate](https://crates.io/crates/jsonox)
 
