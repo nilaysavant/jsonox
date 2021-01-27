@@ -60,7 +60,7 @@ You can install in 3 ways: Using pre-compiled binary, from Crate or by manually 
 
 ## Usage 📡
 
-Run the server via the **CLI**, then setup **REST API endpoints** or if using in **Read Only** mode.
+Run the server via the **CLI**, then setup **REST API endpoints** or use in [Read Only mode](#read-only-mode).
 
 ### Command line (CLI)
 
@@ -100,7 +100,7 @@ Note: In the following examples you may need to use `./jsonox` if using local bi
   jsonox --read-only
   ```
 
-  - Use `-r` or `--read-only` for read-only mode.
+  - Use `-r` or `--read-only` for [read-only mode](#read-only-mode).
 
 - View help and guide:
 
@@ -193,6 +193,11 @@ In this mode, jsonox _only reads the json files stored_ and **does NOT create/de
 
   - In **Read Only** mode we create files like `get.json`, `post.json`, `put.json`, and `delete.json`, instead of `index.json`.
   - `get.json` will contain the **response body** for **GET** requests to that path. Similarly `post.json`, `put.json`, and `delete.json` will contain the **response body** for **POST**, **PUT**, and **DELETE** requests to that path respectively.
+  - Thus as per above structure:
+    - `/pets` will have **GET** and **DELETE** only.
+    - `/pets/cat` will have **GET** only.
+    - `/pets/dog` will have **GET** and **POST** only.
+    - `/toys/doll` will have **GET**, **POST**, **PUT** and **DELETE**.
 
 - The files and paths created by you will not be deleted even if you do a **DELETE** on a path.
 - If you change modes in between, and do a **DELETE** in **normal mode**, this will _only delete `index.json` files at the respective paths_ and NOT delete the other `get.json`, `post.json` etc files created by you.
