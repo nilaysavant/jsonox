@@ -31,6 +31,34 @@ GUIDE (normal mode):
         {purple}GET{nc}: {cyan}/{nc} => {orange}{{ \"active_paths\": [ \"pets\", \"pets/cat\", \"pets/dog\", \"toys/doll\" ] }}{nc}
     
     {green}You can then do{nc} {purple}GET/POST/PUT/DELETE{nc} {green}on the endpoint paths above.{nc}
+
+GUIDE (Read Only mode):
+    {green}Start by creating files in:{nc}
+        {cyan}- pets/
+        - dog/
+            - get.json
+            - post.json
+        - cat/
+            - get.json
+        - get.json
+        - delete.json
+        - toys/
+            - doll/
+            - get.json
+            - post.json
+            - put.json
+            - delete.json{nc}
+    {green}In Read Only mode we create files like get.json, 
+    post.json, put.json, and delete.json, instead of index.json{nc}
+    {green}Thus as per above structure:{nc}
+        {cyan}/pets{nc} will have {purple}GET{nc} and {purple}DELETE{nc} only.
+        {cyan}/pets/cat{nc} will have {purple}GET{nc} only.
+        {cyan}/pets/dog{nc} will have {purple}GET{nc} and {purple}POST{nc} only.
+        {cyan}/toys/doll{nc} will have {purple}GET{nc}, {purple}POST{nc}, {purple}PUT{nc} and {purple}DELETE{nc}.
+    
+    {green}For viewing all active paths (is same as normal mode):{nc}
+        {purple}GET{nc}: {cyan}/{nc} => {orange}{{ \"active_paths\": [ \"pets\", \"pets/cat\", \"pets/dog\", \"toys/doll\" ] }}{nc}
+
 ",
         // red = "\x1b[0;31m",
         // lred = "\x1b[1;31m",
