@@ -60,7 +60,7 @@ You can install in 3 ways: Using pre-compiled binary, from Crate or by manually 
 
 ## Usage 📡
 
-Run the server via the **CLI**, then setup **REST API endpoints**.
+Run the server via the **CLI**, then setup **REST API endpoints** or if using in **Read Only** mode.
 
 ### Command line (CLI)
 
@@ -94,6 +94,14 @@ Note: In the following examples you may need to use `./jsonox` if using local bi
 
   - Use `-q` or `--quiet` for quiet mode.
 
+- Use **ReadOnly** mode:
+
+  ```bash
+  jsonox --read-only
+  ```
+
+  - Use `-r` or `--read-only` for read-only mode.
+
 - View help and guide:
 
   ```bash
@@ -102,7 +110,7 @@ Note: In the following examples you may need to use `./jsonox` if using local bi
 
   - Use `-h` or `--help` for help.
 
-### REST API
+### REST API (normal mode)
 
 Construct **REST API** endpoints on **arbitrary routes** in the following way(s):
 
@@ -159,3 +167,38 @@ You can also setup your own API by creating files under `./jsonox_data` in the s
   ```
 
 - You can then do **GET**,**POST** and **DELETE** similarly, on the endpoint paths above.
+
+### Read Only Mode
+
+In this mode, jsonox _only reads the json files stored_ and **does NOT create/delete** them in case of **POST/DELETE** unlike in the normal mode explained above. This is useful when you **only need to simulate API responses** and when your back-end does not strictly follow the REST standards. You can also record the `./jsonox_data` in your version control to store your API response structures as it won't change based on the simulations/testing in this mode.
+
+- Start by creating files in `./jsonox_data`:
+
+  ```bash
+  - pets/
+    - dog/
+      - get.json
+      - post.json
+    - cat/
+      - get.json
+    - get.json
+    - delete.json
+  - toys/
+    - doll/
+      - get.json
+      - post.json
+      - put.json
+      - delete.json
+  ```
+
+  - In **Read Only** mode we create files like `get.json`, `post.json`, `put.json`, and `delete.json`, instead of `index.json`.
+  - `get.json` will contain the **response body** for **GET** requests to that path. Similarly `post.json`, `put.json`, and `delete.json` will contain the **response body** for **POST**, **PUT**, and **DELETE** requests to that path respectively.
+
+- The files and paths created by you will not be deleted even if you do a **DELETE** on a path.
+- If you change modes in between, and do a **DELETE** in **normal mode**, this will _only delete `index.json` files at the respective paths_ and NOT delete the other `get.json`, `post.json` etc files created by you.
+
+- Similar to normal mode `GET` on `/` will show active endpoints:
+
+  ```json
+  { "active_paths": ["pets", "pets/cat", "pets/dog", "toys/doll"] }
+  ```
