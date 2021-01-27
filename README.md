@@ -1,4 +1,4 @@
-# jsonox 🛰 ![Build Release](https://github.com/nilaysavant/jsonox/workflows/Build%20Release/badge.svg?branch=v0.1.0)
+# jsonox 🛰 ![Build Release](https://github.com/nilaysavant/jsonox/workflows/Build%20Release/badge.svg?branch=v0.2.0)
 
 CLI based RESTful JSON server + store written in Rust.
 
