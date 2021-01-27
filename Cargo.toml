@@ -1,6 +1,6 @@
 [package]
 name = "jsonox"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Nilay Savant <nilayofficial@gmail.com>"]
 edition = "2018"
 description = "CLI based RESTful JSON server + store written in Rust."
