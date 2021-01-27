@@ -2,9 +2,9 @@
 pub fn get_tutorial_text() -> String {
     format!(
         "
-GUIDE:
-    {green}POST data to an arbitrary endpoint. You can the GET the posted data on the same endpoint:{nc}
-        {purple}POST{nc}: {orange}{{ \"cute\" : true }}{nc} => {cyan}/pets/cat{nc}
+GUIDE (normal mode):
+    {green}POST or PUT data to an arbitrary endpoint. You can the GET the posted data on the same endpoint:{nc}
+        {purple}POST{nc}/{purple}PUT{nc}: {orange}{{ \"cute\" : true }}{nc} => {cyan}/pets/cat{nc}
         {purple}GET{nc}: {cyan}/pets/cat{nc} => {orange}{{ \"cute\" : true }}{nc}
 
     {green}Also Delete the stored data:{nc}
@@ -30,7 +30,7 @@ GUIDE:
     {green}Then:{nc}
         {purple}GET{nc}: {cyan}/{nc} => {orange}{{ \"active_paths\": [ \"pets\", \"pets/cat\", \"pets/dog\", \"toys/doll\" ] }}{nc}
     
-    {green}You can then do{nc} {purple}GET/POST/DELETE{nc} {green}on the endpoint paths above.{nc}
+    {green}You can then do{nc} {purple}GET/POST/PUT/DELETE{nc} {green}on the endpoint paths above.{nc}
 ",
         // red = "\x1b[0;31m",
         // lred = "\x1b[1;31m",
